@@ -1,0 +1,46 @@
+version: '2'
+services:
+  nginx:
+      build: ./Nginx
+      depends_on:
+            - rosnode1
+            - rosnode2
+            - rosnode3
+      links:
+          - rosnode1:rosnode1
+          - rosnode2:rosnode2
+          - rosnode3:rosnode3
+      ports:
+          - "80:80"
+      environment:
+          - NGINX_HOST=192.168.0.31
+          - NGINX_PORT=80
+  rosnode1:
+      build: ./Rosweb
+      links:
+          - mongo
+      ports:
+          - "3000"
+
+  rosnode2:
+      build: ./Rosweb
+      links:
+          - mongo
+      ports:
+          - "3000"
+
+  rosnode3:
+      build: ./Rosweb
+      links:
+          - mongo
+      ports:
+          - "3000"
+    
+  mongo:
+      image: mongo:3.6
+      container_name: mongonode
+      volumes:
+        - ./data:/data/db
+      ports:
+        - "27017:27017"
+      command: mongod
