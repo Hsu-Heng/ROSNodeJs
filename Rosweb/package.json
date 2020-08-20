@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "authorized": "^1.0.0",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "bson-ext": "^2.0.1",
     "bxslider": "^4.2.14",
     "connect-flash": "^0.1.1",
